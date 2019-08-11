@@ -5,6 +5,8 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     container_name: todos
+    volumes:
+      - .:/todos
     image: todos
     command: /bin/bash -c "sleep 5 && /todos/run.sh"
     ports:
