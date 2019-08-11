@@ -17,5 +17,29 @@ module Mutations
         )
       end
     end
+
+    field :mark_item_done, Types::ItemType do
+      argument :id, !types.ID, 'the id of the item to mark as done'
+
+      resolve ->(_obj, args, _ctx) do
+        item = Item.find(args[:id])
+
+        item.update!(
+          done: true
+        )
+
+        item
+      end
+    end
+
+    field :delete_item, Types::ItemType do
+      argument :id, !types.ID, 'id of the item to delete'
+
+      resolve ->(_obj, args, _ctx) do
+        item = Item.find(args[:id])
+
+        item.destroy
+      end
+    end
   end
 end
