@@ -20,4 +20,14 @@ RSpec.describe QueryTypes::TodoListQueryType do
       expect(query_result.count).to eq(todo_lists.count)
     end
   end
+
+  describe 'querying a specific todo_list using it\'s id' do
+    it 'returns the queried todo list' do
+      id           = todo_lists.first.id
+      args         = { id: id }
+      query_result = subject.fields['todo_list'].resolve(nil, args, nil)
+
+      expect(query_result).to eq(todo_lists.first)
+    end
+  end
 end
